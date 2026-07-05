@@ -11,6 +11,9 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CartProvider } from "@/context/CartContext";
+import Navbar from "@/components/Navbar";
+import CartDrawer from "@/components/CartDrawer";
 
 function NotFoundComponent() {
   return (
@@ -77,11 +80,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TOONHUB — 3D Figurine Carousel" },
-      { name: "description", content: "TOONHUB figurines — a vivid 3D character showcase." },
+      { title: "AV Parfums — Brumes de luxe" },
+      { name: "description", content: "Brumes parfumées Sweet Dreams & Honey Touch — livraison partout en Algérie, paiement à la livraison." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "TOONHUB — 3D Figurine Carousel" },
-      { property: "og:description", content: "TOONHUB figurines — a vivid 3D character showcase." },
+      { property: "og:title", content: "AV Parfums — Brumes de luxe" },
+      { property: "og:description", content: "Brumes parfumées Sweet Dreams & Honey Touch — livraison partout en Algérie, paiement à la livraison." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:site", content: "@Lovable" },
@@ -125,8 +128,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <CartProvider>
+        <Navbar />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        <CartDrawer />
+      </CartProvider>
     </QueryClientProvider>
   );
 }
