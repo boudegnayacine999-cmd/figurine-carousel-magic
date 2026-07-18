@@ -2,6 +2,8 @@ import honeyBottle from "@/assets/honey-touch-bottle.png.asset.json";
 import sweetBottle from "@/assets/sweet-dreams-bottle.png.asset.json";
 import honeyBg from "@/assets/honey-touch-bg.jpg.asset.json";
 import sweetBg from "@/assets/sweet-dreams-bg.jpg.asset.json";
+import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
+import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
 
 export type Product = {
   id: string;
@@ -39,6 +41,18 @@ export const PRODUCTS: Product[] = [
     bottle: honeyBottle.url,
     bg: honeyBg.url,
     tint: "#D9A25A",
+  },
+  {
+    id: "dziria",
+    name: "Dziria",
+    tagline: "Citron · Fleur d'oranger · Soleil d'Alger",
+    description:
+      "Une ode à Alger — zestes de citron, fleur d'oranger et notes solaires pour une brume lumineuse et raffinée.",
+    volume: "Brume 200ml",
+    price: 2800,
+    bottle: dziriaBottle.url,
+    bg: dziriaBg.url,
+    tint: "#E0913A",
   },
 ];
 
