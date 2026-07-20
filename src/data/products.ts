@@ -4,6 +4,8 @@ import honeyBg from "@/assets/honey-touch-bg.jpg.asset.json";
 import sweetBg from "@/assets/sweet-dreams-bg.jpg.asset.json";
 import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
 import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
+import afroBottle from "@/assets/afro-passion-bottle.png.asset.json";
+import afroBg from "@/assets/afro-passion-bg.jpg.asset.json";
 
 export type Product = {
   id: string;
@@ -53,6 +55,18 @@ export const PRODUCTS: Product[] = [
     bottle: dziriaBottle.url,
     bg: dziriaBg.url,
     tint: "#C9873E",
+  },
+  {
+    id: "afro-passion",
+    name: "Afro Passion",
+    tagline: "Ananas · Coco · Fruits exotiques",
+    description:
+      "Une brume tropicale évasion — ananas juteux, noix de coco et fruits exotiques sur un coucher de soleil doré.",
+    volume: "Brume 200ml",
+    price: 2800,
+    bottle: afroBottle.url,
+    bg: afroBg.url,
+    tint: "#2FA69A",
   },
 ];
 
