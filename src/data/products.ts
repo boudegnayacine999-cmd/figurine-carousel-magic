@@ -6,6 +6,8 @@ import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
 import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
 import afroBottle from "@/assets/afro-passion-bottle.png.asset.json";
 import afroBg from "@/assets/afro-passion-bg.jpg.asset.json";
+import pistachesPack from "@/assets/pistaches-pack.png.asset.json";
+import pistachesBg from "@/assets/pistaches-bg.jpg.asset.json";
 
 export type Product = {
   id: string;
@@ -67,6 +69,18 @@ export const PRODUCTS: Product[] = [
     bottle: afroBottle.url,
     bg: afroBg.url,
     tint: "#2FA69A",
+  },
+  {
+    id: "pistaches",
+    name: "Pistaches",
+    tagline: "Grillées · Salées · 100% naturel",
+    description:
+      "Pistaches grillées et salées, croquantes et généreuses — récoltées au verger, riches en fibres et source de protéines.",
+    volume: "Sachet 250g",
+    price: 1500,
+    bottle: pistachesPack.url,
+    bg: pistachesBg.url,
+    tint: "#7A9331",
   },
 ];
 
