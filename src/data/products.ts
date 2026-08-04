@@ -1,11 +1,3 @@
-import honeyBottle from "@/assets/honey-touch-bottle.png.asset.json";
-import sweetBottle from "@/assets/sweet-dreams-bottle.png.asset.json";
-import honeyBg from "@/assets/honey-touch-bg.jpg.asset.json";
-import sweetBg from "@/assets/sweet-dreams-bg.jpg.asset.json";
-import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
-import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
-import afroBottle from "@/assets/afro-passion-bottle.png.asset.json";
-import afroBg from "@/assets/afro-passion-bg.jpg.asset.json";
 import pistachesPack from "@/assets/pistaches-pack.png.asset.json";
 import pistachesBg from "@/assets/pistaches-bg.jpg.asset.json";
 
@@ -22,54 +14,6 @@ export type Product = {
 };
 
 export const PRODUCTS: Product[] = [
-  {
-    id: "sweet-dreams",
-    name: "Sweet Dreams",
-    tagline: "Floral · Fruits rouges · Musc",
-    description:
-      "Brume parfumée florale — pétales de rose, fruits rouges et une touche de musc pour une signature enveloppante.",
-    volume: "Brume 200ml",
-    price: 2500,
-    bottle: sweetBottle.url,
-    bg: sweetBg.url,
-    tint: "#E88BB0",
-  },
-  {
-    id: "honey-touch",
-    name: "Honey Touch",
-    tagline: "Vanille · Miel · Chaleur",
-    description:
-      "Un sillage chaud et gourmand — miel doré, vanille bourbon et bois précieux pour une aura solaire.",
-    volume: "Brume 200ml",
-    price: 2800,
-    bottle: honeyBottle.url,
-    bg: honeyBg.url,
-    tint: "#D9A25A",
-  },
-  {
-    id: "dziria",
-    name: "Dziria",
-    tagline: "Néroli · Fleur d'oranger · Ambre",
-    description:
-      "Une brume solaire inspirée d'Alger — néroli, fleur d'oranger et ambre doré, comme un coucher de soleil sur la Casbah.",
-    volume: "Brume 200ml",
-    price: 2800,
-    bottle: dziriaBottle.url,
-    bg: dziriaBg.url,
-    tint: "#C9873E",
-  },
-  {
-    id: "afro-passion",
-    name: "Afro Passion",
-    tagline: "Ananas · Coco · Fruits exotiques",
-    description:
-      "Une brume tropicale évasion — ananas juteux, noix de coco et fruits exotiques sur un coucher de soleil doré.",
-    volume: "Brume 200ml",
-    price: 2800,
-    bottle: afroBottle.url,
-    bg: afroBg.url,
-    tint: "#2FA69A",
-  },
   {
     id: "pistaches",
     name: "Pistaches",
