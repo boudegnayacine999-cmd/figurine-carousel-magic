@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ShoppingBag } from "lucide-react";
+import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
 import { PRODUCTS, formatDA } from "@/data/products";
 import { useCart } from "@/context/CartContext";
 import videoBg from "@/assets/commercial-bg.mp4.asset.json";
@@ -24,10 +24,8 @@ export default function Hero() {
 
   useEffect(() => {
     PRODUCTS.forEach((p) => {
-      [p.bottle, p.bg].forEach((src) => {
-        const img = new Image();
-        img.src = src;
-      });
+      const img = new Image();
+      img.src = p.bottle;
     });
   }, []);
 
@@ -39,7 +37,7 @@ export default function Hero() {
   }, []);
 
   const navigate = (dir: "next" | "prev") => {
-    if (isAnimating) return;
+    if (isAnimating || PRODUCTS.length <= 1) return;
     setDirection(dir === "next" ? 1 : -1);
     setIsAnimating(true);
     setActiveIndex((p) =>
@@ -51,6 +49,7 @@ export default function Hero() {
   };
 
   useEffect(() => {
+    if (PRODUCTS.length <= 1) return;
     const el = containerRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
@@ -72,6 +71,7 @@ export default function Hero() {
     touchStartX.current = e.touches[0].clientX;
   };
   const onTouchEnd = (e: React.TouchEvent) => {
+    if (PRODUCTS.length <= 1) return;
     if (touchStartX.current == null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     touchStartX.current = null;
@@ -80,6 +80,7 @@ export default function Hero() {
   };
 
   useEffect(() => {
+    if (PRODUCTS.length <= 1) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") navigate("next");
       else if (e.key === "ArrowLeft") navigate("prev");
@@ -105,30 +106,29 @@ export default function Hero() {
       }}
     >
       <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
-        {PRODUCTS.map((p, i) => (
-          <div
-            key={p.bg}
-            aria-hidden
-            style={{
-              position: "absolute",
-              inset: 0,
-              backgroundImage: `url("${p.bg}")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              opacity: i === activeIndex ? 1 : 0,
-              transform: i === activeIndex ? "scale(1)" : "scale(1.06)",
-              transition: `opacity 800ms ${easing}, transform 1200ms ${easing}`,
-              zIndex: 1,
-            }}
-          />
-        ))}
+        {/* Cinematic video background */}
+        <video
+          key={videoBg.url}
+          src={videoBg.url}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{
+            zIndex: 1,
+            animation: `videoIn 1400ms ${easing} both`,
+          }}
+        />
 
+        {/* Dark overlay for readability */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 2,
             background:
-              "radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%)",
+              "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0) 70%), radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%)",
           }}
         />
 
@@ -169,7 +169,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* Floating bottles */}
+        {/* Floating product image */}
         <div
           className="absolute inset-0 flex items-center justify-center pointer-events-none"
           style={{ zIndex: 20 }}
@@ -252,62 +252,69 @@ export default function Hero() {
               Acheter
             </button>
 
-            {(["prev", "next"] as const).map((dir) => {
-              const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
-              const hovered = hoverBtn === dir;
-              return (
-                <button
-                  key={dir}
-                  aria-label={dir === "prev" ? "Précédent" : "Suivant"}
-                  onClick={() => navigate(dir)}
-                  onMouseEnter={() => setHoverBtn(dir)}
-                  onMouseLeave={() => setHoverBtn(null)}
-                  className="w-11 h-11 sm:w-14 sm:h-14 rounded-full flex items-center justify-center"
-                  style={{
-                    backgroundColor: hovered ? active.tint : "transparent",
-                    border: "2px solid #fff",
-                    color: "#fff",
-                    transform: hovered ? "scale(1.08)" : "scale(1)",
-                    transition: "transform 200ms, background-color 250ms, box-shadow 250ms",
-                    boxShadow: hovered ? `0 10px 30px ${active.tint}80` : "none",
-                  }}
-                >
-                  <Icon size={22} strokeWidth={2.25} />
-                </button>
-              );
-            })}
+            {PRODUCTS.length > 1 &&
+              (["prev", "next"] as const).map((dir) => {
+                const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
+                const hovered = hoverBtn === dir;
+                return (
+                  <button
+                    key={dir}
+                    aria-label={dir === "prev" ? "Précédent" : "Suivant"}
+                    onClick={() => navigate(dir)}
+                    onMouseEnter={() => setHoverBtn(dir)}
+                    onMouseLeave={() => setHoverBtn(null)}
+                    className="w-11 h-11 sm:w-14 sm:h-14 rounded-full flex items-center justify-center"
+                    style={{
+                      backgroundColor: hovered ? active.tint : "transparent",
+                      border: "2px solid #fff",
+                      color: "#fff",
+                      transform: hovered ? "scale(1.08)" : "scale(1)",
+                      transition: "transform 200ms, background-color 250ms, box-shadow 250ms",
+                      boxShadow: hovered ? `0 10px 30px ${active.tint}80` : "none",
+                    }}
+                  >
+                    <Icon size={22} strokeWidth={2.25} />
+                  </button>
+                );
+              })}
           </div>
         </div>
 
         {/* Pagination dots */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 flex gap-2"
-          style={{ zIndex: 60, bottom: isMobile ? 12 : 20 }}
-        >
-          {PRODUCTS.map((_, i) => (
-            <button
-              key={i}
-              aria-label={`Aller au produit ${i + 1}`}
-              onClick={() => {
-                if (i === activeIndex || isAnimating) return;
-                setDirection(i > activeIndex ? 1 : -1);
-                setIsAnimating(true);
-                setActiveIndex(i);
-                window.setTimeout(() => setIsAnimating(false), 850);
-              }}
-              className="rounded-full"
-              style={{
-                width: i === activeIndex ? 28 : 8,
-                height: 8,
-                backgroundColor: i === activeIndex ? "#fff" : "rgba(255,255,255,0.5)",
-                transition: `width 350ms ${easing}, background-color 350ms`,
-              }}
-            />
-          ))}
-        </div>
+        {PRODUCTS.length > 1 && (
+          <div
+            className="absolute left-1/2 -translate-x-1/2 flex gap-2"
+            style={{ zIndex: 60, bottom: isMobile ? 12 : 20 }}
+          >
+            {PRODUCTS.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Aller au produit ${i + 1}`}
+                onClick={() => {
+                  if (i === activeIndex || isAnimating) return;
+                  setDirection(i > activeIndex ? 1 : -1);
+                  setIsAnimating(true);
+                  setActiveIndex(i);
+                  window.setTimeout(() => setIsAnimating(false), 850);
+                }}
+                className="rounded-full"
+                style={{
+                  width: i === activeIndex ? 28 : 8,
+                  height: 8,
+                  backgroundColor: i === activeIndex ? "#fff" : "rgba(255,255,255,0.5)",
+                  transition: `width 350ms ${easing}, background-color 350ms`,
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       <style>{`
+        @keyframes videoIn {
+          from { opacity: 0; transform: scale(1.08); }
+          to { opacity: 1; transform: scale(1); }
+        }
         @keyframes floatBottle {
           0%, 100% { translate: 0 0; }
           50% { translate: 0 -14px; }
