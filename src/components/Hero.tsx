@@ -106,10 +106,19 @@ export default function Hero() {
       }}
     >
       <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
-        {/* Cinematic video background */}
+        {/* Fallback static background + cinematic video */}
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url("${active.bg}")`,
+            zIndex: 0,
+          }}
+        />
         <video
           key={videoBg.url}
           src={videoBg.url}
+          poster={active.bg}
           autoPlay
           muted
           loop
