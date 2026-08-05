@@ -180,12 +180,15 @@ export default function Hero() {
 
         {/* Floating product image */}
         <div
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute inset-0 pointer-events-none"
           style={{ zIndex: 20 }}
         >
           {PRODUCTS.map((p, i) => {
             const isActive = i === activeIndex;
             const enterFrom = direction === 1 ? 80 : -80;
+            const baseTransform = isMobile
+              ? "translateX(50%) translateY(-50%)"
+              : "translateY(-50%)";
             return (
               <img
                 key={p.bottle}
@@ -195,13 +198,16 @@ export default function Hero() {
                 className={isActive ? "floating-bottle" : ""}
                 style={{
                   position: "absolute",
-                  height: isMobile ? "52%" : "82%",
+                  top: "50%",
+                  right: isMobile ? "50%" : "8%",
+                  height: isMobile ? "40%" : "52%",
+                  maxWidth: isMobile ? "90%" : "55%",
                   width: "auto",
                   objectFit: "contain",
                   opacity: isActive ? 1 : 0,
                   transform: isActive
-                    ? "translateY(0) scale(1)"
-                    : `translateX(${enterFrom}px) translateY(20px) scale(0.92)`,
+                    ? `${baseTransform} scale(1)`
+                    : `${baseTransform} translateX(${enterFrom}px) scale(0.92)`,
                   transition: `opacity 650ms ${easing}, transform 850ms ${easing}`,
                   filter:
                     "drop-shadow(0 40px 40px rgba(0,0,0,0.35)) drop-shadow(0 15px 20px rgba(0,0,0,0.25))",
