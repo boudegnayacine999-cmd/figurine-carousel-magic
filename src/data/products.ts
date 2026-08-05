@@ -1,3 +1,6 @@
+import pistachesPack from "@/assets/pistaches-pack.png.asset.json";
+import pistachesBg from "@/assets/pistaches-bg.jpg.asset.json";
+
 export type Product = {
   id: string;
   name: string;
@@ -10,7 +13,20 @@ export type Product = {
   tint: string;
 };
 
-export const PRODUCTS: Product[] = [];
+export const PRODUCTS: Product[] = [
+  {
+    id: "pistaches",
+    name: "Pistaches",
+    tagline: "Grillées · Salées · 100% naturel",
+    description:
+      "Pistaches grillées et salées, croquantes et généreuses — récoltées au verger, riches en fibres et source de protéines.",
+    volume: "Sachet 250g",
+    price: 1500,
+    bottle: pistachesPack.url,
+    bg: pistachesBg.url,
+    tint: "#7A9331",
+  },
+];
 
 export const formatDA = (n: number) =>
   new Intl.NumberFormat("fr-DZ").format(n) + " DA";
