@@ -316,10 +316,6 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @keyframes videoIn {
-          from { opacity: 0; transform: scale(1.08); }
-          to { opacity: 1; transform: scale(1); }
-        }
         @keyframes floatBottle {
           0%, 100% { translate: 0 0; }
           50% { translate: 0 -14px; }
