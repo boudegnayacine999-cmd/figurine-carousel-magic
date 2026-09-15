@@ -1,5 +1,11 @@
-import pistachesPack from "@/assets/pistaches-pack.png.asset.json";
-import pistachesBg from "@/assets/pistaches-bg.jpg.asset.json";
+import sweetDreamsBottle from "@/assets/sweet-dreams-bottle.png.asset.json";
+import sweetDreamsBg from "@/assets/sweet-dreams-bg.jpg.asset.json";
+import honeyTouchBottle from "@/assets/honey-touch-bottle.png.asset.json";
+import honeyTouchBg from "@/assets/honey-touch-bg.jpg.asset.json";
+import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
+import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
+import afroPassionBottle from "@/assets/afro-passion-bottle.png.asset.json";
+import afroPassionBg from "@/assets/afro-passion-bg.jpg.asset.json";
 
 export type Product = {
   id: string;
@@ -15,16 +21,52 @@ export type Product = {
 
 export const PRODUCTS: Product[] = [
   {
-    id: "pistaches",
-    name: "Pistaches",
-    tagline: "Grillées · Salées · 100% naturel",
+    id: "sweet-dreams",
+    name: "Sweet Dreams",
+    tagline: "Pêche · Fraise · Fleurs blanches",
     description:
-      "Pistaches grillées et salées, croquantes et généreuses — récoltées au verger, riches en fibres et source de protéines.",
-    volume: "Sachet 250g",
-    price: 1500,
-    bottle: pistachesPack.url,
-    bg: pistachesBg.url,
-    tint: "#7A9331",
+      "Une brume gourmande et florale : pêche juteuse, fraise sucrée et bouquet de fleurs blanches pour une sensation douce toute la journée.",
+    volume: "Brume 250ml",
+    price: 2500,
+    bottle: sweetDreamsBottle.url,
+    bg: sweetDreamsBg.url,
+    tint: "#D96A86",
+  },
+  {
+    id: "honey-touch",
+    name: "Honey Touch",
+    tagline: "Miel · Vanille · Ambre",
+    description:
+      "Une brume chaude et enveloppante : miel doré, vanille crémeuse et ambre pour un sillage sensuel et lumineux.",
+    volume: "Brume 250ml",
+    price: 2800,
+    bottle: honeyTouchBottle.url,
+    bg: honeyTouchBg.url,
+    tint: "#C58A2E",
+  },
+  {
+    id: "dziria",
+    name: "Dziria",
+    tagline: "Néroli · Fleur d'oranger · Ambre",
+    description:
+      "L'âme d'Alger en brume : néroli éclatant, fleur d'oranger et ambre doux, comme un coucher de soleil sur la Casbah.",
+    volume: "Brume 250ml",
+    price: 2800,
+    bottle: dziriaBottle.url,
+    bg: dziriaBg.url,
+    tint: "#C4743A",
+  },
+  {
+    id: "afro-passion",
+    name: "Afro Passion",
+    tagline: "Ananas · Coco · Fruit de la passion",
+    description:
+      "Une brume tropicale et solaire : ananas juteux, noix de coco crémeuse et fruit de la passion pour un été permanent.",
+    volume: "Brume 250ml",
+    price: 2800,
+    bottle: afroPassionBottle.url,
+    bg: afroPassionBg.url,
+    tint: "#E0763F",
   },
 ];
 

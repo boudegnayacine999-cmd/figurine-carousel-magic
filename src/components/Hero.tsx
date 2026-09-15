@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
 import { PRODUCTS, formatDA } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-import videoBg from "@/assets/hero-bg-2.mp4.asset.json";
 
 const GRAIN_SVG =
   "data:image/svg+xml;utf8," +
@@ -106,30 +105,21 @@ export default function Hero() {
       }}
     >
       <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
-        {/* Fallback static background + cinematic video */}
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url("${active.bg}")`,
-            zIndex: 0,
-          }}
-        />
-        <video
-          key={videoBg.url}
-          src={videoBg.url}
-          poster={active.bg}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{
-            zIndex: 1,
-            animation: `videoIn 1400ms ${easing} both`,
-          }}
-        />
+        {/* Crossfading product backgrounds */}
+        {PRODUCTS.map((p, i) => (
+          <div
+            key={p.bg}
+            aria-hidden
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: `url("${p.bg}")`,
+              zIndex: i === activeIndex ? 1 : 0,
+              opacity: i === activeIndex ? 1 : 0,
+              transform: i === activeIndex ? "scale(1)" : "scale(1.05)",
+              transition: `opacity 800ms ${easing}, transform 1200ms ${easing}`,
+            }}
+          />
+        ))}
 
         {/* Dark overlay for readability */}
         <div
@@ -326,10 +316,6 @@ export default function Hero() {
       </div>
 
       <style>{`
-        @keyframes videoIn {
-          from { opacity: 0; transform: scale(1.08); }
-          to { opacity: 1; transform: scale(1); }
-        }
         @keyframes floatBottle {
           0%, 100% { translate: 0 0; }
           50% { translate: 0 -14px; }
