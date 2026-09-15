@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
 import { PRODUCTS, formatDA } from "@/data/products";
 import { useCart } from "@/context/CartContext";
-import videoBg from "@/assets/hero-bg-2.mp4.asset.json";
 
 const GRAIN_SVG =
   "data:image/svg+xml;utf8," +
