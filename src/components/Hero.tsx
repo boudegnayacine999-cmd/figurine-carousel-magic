@@ -176,9 +176,7 @@ export default function Hero() {
           {PRODUCTS.map((p, i) => {
             const isActive = i === activeIndex;
             const enterFrom = direction === 1 ? 80 : -80;
-            const baseTransform = isMobile
-              ? "translateX(50%) translateY(-50%)"
-              : "translateY(-50%)";
+            const baseTransform = "translateX(50%) translateY(-50%)";
             return (
               <img
                 key={p.bottle}
