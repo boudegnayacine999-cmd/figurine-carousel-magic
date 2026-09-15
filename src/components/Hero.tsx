@@ -187,9 +187,9 @@ export default function Hero() {
                 style={{
                   position: "absolute",
                   top: "50%",
-                  right: isMobile ? "50%" : "8%",
-                  height: isMobile ? "40%" : "52%",
-                  maxWidth: isMobile ? "90%" : "55%",
+                  right: "50%",
+                  height: isMobile ? "46%" : "64%",
+                  maxWidth: isMobile ? "90%" : "60%",
                   width: "auto",
                   objectFit: "contain",
                   opacity: isActive ? 1 : 0,
