@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import type { Product } from "@/data/products";
 
-export type CartItem = { product: Product; qty: number };
+export type CartItem = { key: string; product: Product; size: number; qty: number };
 
 type CartCtx = {
   items: CartItem[];
@@ -11,9 +11,9 @@ type CartCtx = {
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  add: (p: Product, qty?: number) => void;
-  remove: (id: string) => void;
-  setQty: (id: string, qty: number) => void;
+  add: (p: Product, size: number, qty?: number) => void;
+  remove: (key: string) => void;
+  setQty: (key: string, qty: number) => void;
   clear: () => void;
 };
 
@@ -23,27 +23,28 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const add = useCallback((p: Product, qty = 1) => {
+  const add = useCallback((p: Product, size: number, qty = 1) => {
+    const key = `${p.id}-${size}`;
     setItems((prev) => {
-      const i = prev.findIndex((it) => it.product.id === p.id);
+      const i = prev.findIndex((it) => it.key === key);
       if (i >= 0) {
         const next = [...prev];
         next[i] = { ...next[i], qty: next[i].qty + qty };
         return next;
       }
-      return [...prev, { product: p, qty }];
+      return [...prev, { key, product: p, size, qty }];
     });
     setIsOpen(true);
   }, []);
 
-  const remove = useCallback((id: string) => {
-    setItems((prev) => prev.filter((it) => it.product.id !== id));
+  const remove = useCallback((key: string) => {
+    setItems((prev) => prev.filter((it) => it.key !== key));
   }, []);
 
-  const setQty = useCallback((id: string, qty: number) => {
+  const setQty = useCallback((key: string, qty: number) => {
     setItems((prev) =>
       prev
-        .map((it) => (it.product.id === id ? { ...it, qty: Math.max(0, qty) } : it))
+        .map((it) => (it.key === key ? { ...it, qty: Math.max(0, qty) } : it))
         .filter((it) => it.qty > 0),
     );
   }, []);

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { PRODUCTS, formatDA } from "@/data/products";
-import { useCart } from "@/context/CartContext";
 
 const GRAIN_SVG =
   "data:image/svg+xml;utf8," +
@@ -10,7 +10,6 @@ const GRAIN_SVG =
   );
 
 export default function Hero() {
-  const { add } = useCart();
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState<1 | -1>(1);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -24,7 +23,7 @@ export default function Hero() {
   useEffect(() => {
     PRODUCTS.forEach((p) => {
       const img = new Image();
-      img.src = p.bottle;
+      img.src = p.image;
     });
   }, []);
 
@@ -105,7 +104,6 @@ export default function Hero() {
       }}
     >
       <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
-        {/* Crossfading product backgrounds */}
         {PRODUCTS.map((p, i) => (
           <div
             key={p.bg}
@@ -121,13 +119,12 @@ export default function Hero() {
           />
         ))}
 
-        {/* Dark overlay for readability */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 2,
             background:
-              "linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.2) 45%, rgba(0,0,0,0) 70%), radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%)",
+              "linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0) 70%), radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.45) 100%)",
           }}
         />
 
@@ -142,7 +139,7 @@ export default function Hero() {
           }}
         />
 
-        {/* Ghost product name */}
+        {/* Ghost name */}
         <div
           className="absolute inset-x-0 flex items-center justify-center pointer-events-none select-none"
           style={{ zIndex: 3, top: isMobile ? "14%" : "18%" }}
@@ -151,7 +148,7 @@ export default function Hero() {
             key={active.name + "-ghost"}
             style={{
               fontFamily: "Anton, sans-serif",
-              fontSize: isMobile ? "clamp(48px, 18vw, 100px)" : "clamp(70px, 15vw, 220px)",
+              fontSize: isMobile ? "clamp(34px, 12vw, 70px)" : "clamp(60px, 11vw, 180px)",
               fontWeight: 900,
               color: "#ffffff",
               opacity: isMobile ? 0.16 : 0.22,
@@ -164,33 +161,30 @@ export default function Hero() {
               animation: `ghostIn 700ms ${easing} both`,
             }}
           >
-            {active.name}
+            {active.fruit}
           </h1>
         </div>
 
-        {/* Floating product image */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{ zIndex: 20 }}
-        >
+        {/* Floating sneakers */}
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 20 }}>
           {PRODUCTS.map((p, i) => {
             const isActive = i === activeIndex;
             const enterFrom = direction === 1 ? 80 : -80;
             const baseTransform = "translateX(50%) translateY(-50%)";
             return (
               <img
-                key={p.bottle}
-                src={p.bottle}
-                alt={p.name}
+                key={p.image}
+                src={p.image}
+                alt={`Air Max Plus ${p.fruit} inspirée de ${p.character}`}
                 draggable={false}
                 className={isActive ? "floating-bottle" : ""}
                 style={{
                   position: "absolute",
-                  top: "50%",
+                  top: "52%",
                   right: "50%",
-                  height: isMobile ? "46%" : "64%",
-                  maxWidth: isMobile ? "90%" : "60%",
-                  width: "auto",
+                  width: isMobile ? "88%" : "56%",
+                  maxWidth: 820,
+                  height: "auto",
                   objectFit: "contain",
                   opacity: isActive ? 1 : 0,
                   transform: isActive
@@ -198,7 +192,7 @@ export default function Hero() {
                     : `${baseTransform} translateX(${enterFrom}px) scale(0.92)`,
                   transition: `opacity 650ms ${easing}, transform 850ms ${easing}`,
                   filter:
-                    "drop-shadow(0 40px 40px rgba(0,0,0,0.35)) drop-shadow(0 15px 20px rgba(0,0,0,0.25))",
+                    "drop-shadow(0 45px 45px rgba(0,0,0,0.45)) drop-shadow(0 15px 20px rgba(0,0,0,0.3))",
                   willChange: "transform, opacity",
                 }}
               />
@@ -206,28 +200,28 @@ export default function Hero() {
           })}
         </div>
 
-        {/* Bottom-left product info + nav */}
+        {/* Info */}
         <div
           className="absolute left-4 right-4 bottom-6 sm:right-auto sm:bottom-16 sm:left-16 text-center sm:text-left"
-          style={{ zIndex: 60, maxWidth: isMobile ? undefined : 360 }}
+          style={{ zIndex: 60, maxWidth: isMobile ? undefined : 380 }}
         >
           <div
             className="inline-block px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-2"
             style={{ backgroundColor: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", color: "#fff" }}
           >
-            {active.volume}
+            Inspirée de {active.character}
           </div>
           <h2
             className="mb-2 text-xl sm:text-[26px] font-bold uppercase tracking-wider"
             style={{ color: "#fff", letterSpacing: "0.06em" }}
           >
-            {active.name}
+            Air Max Plus · {active.fruit}
           </h2>
           <p
             className="text-xs sm:text-sm mb-3 mx-auto sm:mx-0 max-w-xs sm:max-w-none"
             style={{ color: "#fff", opacity: 0.9, lineHeight: 1.6 }}
           >
-            {active.description}
+            {active.tagline}
           </p>
           <div
             className="mb-4 text-2xl sm:text-3xl font-bold"
@@ -237,8 +231,9 @@ export default function Hero() {
           </div>
 
           <div className="flex gap-3 items-center justify-center sm:justify-start flex-wrap">
-            <button
-              onClick={() => add(active)}
+            <Link
+              to="/produit/$slug"
+              params={{ slug: active.id }}
               onMouseEnter={() => setCtaHover(true)}
               onMouseLeave={() => setCtaHover(false)}
               className="inline-flex items-center gap-2 px-6 py-3 sm:px-7 sm:py-4 rounded-full text-xs sm:text-sm font-semibold uppercase tracking-widest"
@@ -253,7 +248,7 @@ export default function Hero() {
             >
               <ShoppingBag size={16} strokeWidth={2.25} />
               Acheter
-            </button>
+            </Link>
 
             {PRODUCTS.length > 1 &&
               (["prev", "next"] as const).map((dir) => {
@@ -283,7 +278,6 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Pagination dots */}
         {PRODUCTS.length > 1 && (
           <div
             className="absolute left-1/2 -translate-x-1/2 flex gap-2"
@@ -292,7 +286,7 @@ export default function Hero() {
             {PRODUCTS.map((_, i) => (
               <button
                 key={i}
-                aria-label={`Aller au produit ${i + 1}`}
+                aria-label={`Aller au modèle ${i + 1}`}
                 onClick={() => {
                   if (i === activeIndex || isAnimating) return;
                   setDirection(i > activeIndex ? 1 : -1);
@@ -318,9 +312,7 @@ export default function Hero() {
           0%, 100% { translate: 0 0; }
           50% { translate: 0 -14px; }
         }
-        .floating-bottle {
-          animation: floatBottle 5.5s ease-in-out infinite;
-        }
+        .floating-bottle { animation: floatBottle 5.5s ease-in-out infinite; }
         @keyframes ghostIn {
           from { opacity: 0; transform: translateY(20px) scale(0.98); }
           to { opacity: var(--ghost-opacity, 0.22); transform: translateY(0) scale(1); }
