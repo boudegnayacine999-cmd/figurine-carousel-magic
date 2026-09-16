@@ -1,74 +1,97 @@
-import sweetDreamsBottle from "@/assets/sweet-dreams-bottle.png.asset.json";
-import sweetDreamsBg from "@/assets/sweet-dreams-bg.jpg.asset.json";
-import honeyTouchBottle from "@/assets/honey-touch-bottle.png.asset.json";
-import honeyTouchBg from "@/assets/honey-touch-bg.jpg.asset.json";
-import dziriaBottle from "@/assets/dziria-bottle.png.asset.json";
-import dziriaBg from "@/assets/dziria-bg.jpg.asset.json";
-import afroPassionBottle from "@/assets/afro-passion-bottle.png.asset.json";
-import afroPassionBg from "@/assets/afro-passion-bg.jpg.asset.json";
+import luffyShoe from "@/assets/nike-luffy.png.asset.json";
+import luffyBg from "@/assets/bg-luffy.jpg.asset.json";
+import aceShoe from "@/assets/nike-ace.png.asset.json";
+import aceBg from "@/assets/bg-ace.jpg.asset.json";
+import lawShoe from "@/assets/nike-law.png.asset.json";
+import lawBg from "@/assets/bg-law.jpg.asset.json";
 
 export type Product = {
   id: string;
   name: string;
+  fruit: string;
+  character: string;
   tagline: string;
   description: string;
-  volume: string;
+  details: string[];
+  volume: string; // edition label
   price: number; // DA
-  bottle: string;
+  oldPrice?: number;
+  image: string;
   bg: string;
   tint: string;
+  sizes: number[];
 };
 
 export const PRODUCTS: Product[] = [
   {
-    id: "sweet-dreams",
-    name: "Sweet Dreams",
-    tagline: "Pêche · Fraise · Fleurs blanches",
+    id: "gomu-gomu",
+    name: "Gomu Gomu no Mi",
+    fruit: "Gomu Gomu no Mi",
+    character: "Luffy",
+    tagline: "Violet · Citron vert · Spirales du fruit du démon",
     description:
-      "Une brume gourmande et florale : pêche juteuse, fraise sucrée et bouquet de fleurs blanches pour une sensation douce toute la journée.",
-    volume: "Brume 250ml",
-    price: 2500,
-    bottle: sweetDreamsBottle.url,
-    bg: sweetDreamsBg.url,
-    tint: "#D96A86",
+      "Air Max Plus édition Gomu Gomu : violet élastique, spirales gravées du fruit du démon et touches citron vert. L'énergie du futur Roi des Pirates.",
+    details: [
+      "Tige TPU thermosoudée à motif spirales",
+      "Unité Air Max Plus visible",
+      "Doublure et lacets citron vert",
+      "Semelle dégradée violet profond",
+    ],
+    volume: "Édition limitée",
+    price: 24900,
+    oldPrice: 29900,
+    image: luffyShoe.url,
+    bg: luffyBg.url,
+    tint: "#7C3AED",
+    sizes: [39, 40, 41, 42, 43, 44, 45],
   },
   {
-    id: "honey-touch",
-    name: "Honey Touch",
-    tagline: "Miel · Vanille · Ambre",
+    id: "mera-mera",
+    name: "Mera Mera no Mi",
+    fruit: "Mera Mera no Mi",
+    character: "Ace",
+    tagline: "Orange · Feu · Turquoise",
     description:
-      "Une brume chaude et enveloppante : miel doré, vanille crémeuse et ambre pour un sillage sensuel et lumineux.",
-    volume: "Brume 250ml",
-    price: 2800,
-    bottle: honeyTouchBottle.url,
-    bg: honeyTouchBg.url,
-    tint: "#C58A2E",
+      "Air Max Plus édition Mera Mera : dégradé de flammes orange et jaune, accents turquoise rappelant l'océan. Le feu de l'homme qui n'a jamais reculé.",
+    details: [
+      "Dégradé flamme orange / jaune",
+      "Unité Air Max Plus visible",
+      "Lacets et doublure turquoise",
+      "Semelle rouge braise",
+    ],
+    volume: "Édition limitée",
+    price: 24900,
+    oldPrice: 29900,
+    image: aceShoe.url,
+    bg: aceBg.url,
+    tint: "#EA580C",
+    sizes: [39, 40, 41, 42, 43, 44, 45],
   },
   {
-    id: "dziria",
-    name: "Dziria",
-    tagline: "Néroli · Fleur d'oranger · Ambre",
+    id: "ope-ope",
+    name: "Ope Ope no Mi",
+    fruit: "Ope Ope no Mi",
+    character: "Law",
+    tagline: "Rose magenta · Vert chirurgical",
     description:
-      "L'âme d'Alger en brume : néroli éclatant, fleur d'oranger et ambre doux, comme un coucher de soleil sur la Casbah.",
-    volume: "Brume 250ml",
-    price: 2800,
-    bottle: dziriaBottle.url,
-    bg: dziriaBg.url,
-    tint: "#C4743A",
-  },
-  {
-    id: "afro-passion",
-    name: "Afro Passion",
-    tagline: "Ananas · Coco · Fruit de la passion",
-    description:
-      "Une brume tropicale et solaire : ananas juteux, noix de coco crémeuse et fruit de la passion pour un été permanent.",
-    volume: "Brume 250ml",
-    price: 2800,
-    bottle: afroPassionBottle.url,
-    bg: afroPassionBg.url,
-    tint: "#E0763F",
+      "Air Max Plus édition Ope Ope : rose magenta chirurgical, spirales du fruit et contrastes verts. Le style froid et précis du Chirurgien de la Mort.",
+    details: [
+      "Rose magenta satiné à spirales",
+      "Unité Air Max Plus visible",
+      "Lacets et col vert vif",
+      "Semelle bordeaux translucide",
+    ],
+    volume: "Édition limitée",
+    price: 24900,
+    oldPrice: 29900,
+    image: lawShoe.url,
+    bg: lawBg.url,
+    tint: "#DB2777",
+    sizes: [39, 40, 41, 42, 43, 44, 45],
   },
 ];
+
+export const getProduct = (id: string) => PRODUCTS.find((p) => p.id === id);
 
 export const formatDA = (n: number) =>
   new Intl.NumberFormat("fr-DZ").format(n) + " DA";
