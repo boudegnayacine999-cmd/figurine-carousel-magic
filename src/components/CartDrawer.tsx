@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Minus, Plus, X, Trash2, CheckCircle2 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { formatDA, WILAYAS } from "@/data/products";
+import { Button } from "@/components/ui/button";
 
 export default function CartDrawer() {
   const { isOpen, closeCart, items, subtotal, setQty, remove, clear } = useCart();
@@ -70,13 +71,15 @@ export default function CartDrawer() {
       >
         <header className="flex items-center justify-between px-5 py-4 border-b">
           <h2 className="text-lg font-bold uppercase tracking-widest">Mon panier</h2>
-          <button
+          <Button
+            variant="ghost"
+            size="icon"
             onClick={closeCart}
             aria-label="Fermer"
-            className="w-9 h-9 rounded-full hover:bg-black/5 flex items-center justify-center"
+            className="rounded-full"
           >
             <X size={20} />
-          </button>
+          </Button>
         </header>
 
         {success ? (
@@ -86,12 +89,12 @@ export default function CartDrawer() {
             <p className="text-sm text-neutral-600">
               Notre équipe va vous contacter par téléphone pour confirmer votre commande.
             </p>
-            <button
+            <Button
               onClick={closeAll}
-              className="mt-4 px-6 py-3 rounded-full bg-black text-white text-sm font-semibold uppercase tracking-widest hover:bg-neutral-800 transition"
+              className="mt-4 rounded-full px-6 py-3 uppercase"
             >
               Fermer
-            </button>
+            </Button>
           </div>
         ) : (
           <div className="flex-1 overflow-y-auto">
@@ -104,13 +107,13 @@ export default function CartDrawer() {
               ) : (
                 <ul className="space-y-4">
                   {items.map((it) => (
-                    <li key={it.product.id} className="flex gap-3">
+                    <li key={it.key} className="flex gap-3">
                       <div
                         className="w-20 h-20 rounded-lg shrink-0 flex items-center justify-center"
                         style={{ backgroundColor: it.product.tint + "22" }}
                       >
                         <img
-                          src={it.product.bottle}
+                          src={it.product.image}
                           alt={it.product.name}
                           className="max-h-16 w-auto object-contain"
                         />
@@ -118,32 +121,38 @@ export default function CartDrawer() {
                       <div className="min-w-0 flex-1">
                         <div className="flex justify-between gap-2">
                           <h3 className="font-semibold truncate">{it.product.name}</h3>
-                          <button
-                            onClick={() => remove(it.product.id)}
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => remove(it.key)}
                             aria-label="Retirer"
-                            className="text-neutral-400 hover:text-red-600 transition"
+                            className="h-8 w-8 text-neutral-400 hover:text-red-600"
                           >
                             <Trash2 size={16} />
-                          </button>
+                          </Button>
                         </div>
-                        <p className="text-xs text-neutral-500">{it.product.volume}</p>
+                        <p className="text-xs text-neutral-500">Pointure {it.size} · {it.product.volume}</p>
                         <div className="mt-2 flex items-center justify-between">
                           <div className="flex items-center border rounded-full">
-                            <button
-                              onClick={() => setQty(it.product.id, it.qty - 1)}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => setQty(it.key, it.qty - 1)}
                               aria-label="Diminuer"
-                              className="w-8 h-8 flex items-center justify-center hover:bg-black/5 rounded-l-full"
+                              className="h-8 w-8 rounded-l-full"
                             >
                               <Minus size={14} />
-                            </button>
+                            </Button>
                             <span className="w-8 text-center text-sm">{it.qty}</span>
-                            <button
-                              onClick={() => setQty(it.product.id, it.qty + 1)}
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => setQty(it.key, it.qty + 1)}
                               aria-label="Augmenter"
-                              className="w-8 h-8 flex items-center justify-center hover:bg-black/5 rounded-r-full"
+                              className="h-8 w-8 rounded-r-full"
                             >
                               <Plus size={14} />
-                            </button>
+                            </Button>
                           </div>
                           <span className="font-semibold text-sm">
                             {formatDA(it.product.price * it.qty)}
@@ -208,13 +217,13 @@ export default function CartDrawer() {
                 maxLength={200}
                 className="w-full px-4 py-3 rounded-lg border border-neutral-300 focus:outline-none focus:border-black text-sm resize-none"
               />
-              <button
+              <Button
                 type="submit"
                 disabled={!canSubmit || submitting}
-                className="w-full py-4 rounded-full bg-black text-white text-sm font-semibold uppercase tracking-widest hover:bg-neutral-800 transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="h-auto w-full rounded-full py-4 uppercase"
               >
                 {submitting ? "Envoi..." : "Confirmer ma commande (Paiement à la livraison)"}
-              </button>
+              </Button>
             </form>
           </div>
         )}

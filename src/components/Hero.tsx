@@ -142,19 +142,19 @@ export default function Hero() {
         {/* Ghost name */}
         <div
           className="absolute inset-x-0 flex items-center justify-center pointer-events-none select-none"
-          style={{ zIndex: 3, top: isMobile ? "14%" : "18%" }}
+          style={{ zIndex: 10, top: isMobile ? "18%" : "20%", paddingInline: isMobile ? 16 : 40 }}
         >
           <h1
             key={active.name + "-ghost"}
             style={{
               fontFamily: "Anton, sans-serif",
-              fontSize: isMobile ? "clamp(34px, 12vw, 70px)" : "clamp(60px, 11vw, 180px)",
+              fontSize: isMobile ? "clamp(34px, 11vw, 58px)" : "clamp(58px, 9vw, 150px)",
               fontWeight: 900,
               color: "#ffffff",
               opacity: isMobile ? 0.16 : 0.22,
               lineHeight: 1,
               textTransform: "uppercase",
-              letterSpacing: "-0.03em",
+              letterSpacing: 0,
               whiteSpace: "nowrap",
               margin: 0,
               textShadow: "0 8px 30px rgba(0,0,0,0.15)",
@@ -180,11 +180,12 @@ export default function Hero() {
                 className={isActive ? "floating-bottle" : ""}
                 style={{
                   position: "absolute",
-                  top: "52%",
+                  top: isMobile ? "48%" : "50%",
                   right: "50%",
-                  width: isMobile ? "88%" : "56%",
-                  maxWidth: 820,
-                  height: "auto",
+                  width: isMobile ? "72%" : "65%",
+                  maxWidth: "65%",
+                  maxHeight: "55vh",
+                  height: "55vh",
                   objectFit: "contain",
                   opacity: isActive ? 1 : 0,
                   transform: isActive
