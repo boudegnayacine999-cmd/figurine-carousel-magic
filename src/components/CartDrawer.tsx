@@ -113,7 +113,7 @@ export default function CartDrawer() {
                         style={{ backgroundColor: it.product.tint + "22" }}
                       >
                         <img
-                          src={it.product.bottle}
+                          src={it.product.image}
                           alt={it.product.name}
                           className="max-h-16 w-auto object-contain"
                         />

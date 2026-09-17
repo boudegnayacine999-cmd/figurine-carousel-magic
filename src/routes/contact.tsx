@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MessageCircle } from "lucide-react";
+import { MessageCircle, ShoppingBag } from "lucide-react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({ meta: [
@@ -21,8 +21,8 @@ function ContactPage() {
         <h1 className="mt-3 text-5xl font-bold uppercase sm:text-7xl" style={{ fontFamily: "Anton, sans-serif" }}>Une question ?</h1>
         <p className="mt-5 max-w-xl text-muted-foreground">Pour une pointure, une livraison ou une commande, choisissez le moyen de contact qui vous convient.</p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2">
-          <a href="mailto:contact@grandlinekicks.dz" className="rounded-lg border border-border p-7 transition hover:bg-muted"><Mail size={28} /><h2 className="mt-5 font-bold">E-mail</h2><p className="mt-1 text-sm text-muted-foreground">contact@grandlinekicks.dz</p></a>
-          <div className="rounded-lg border border-border p-7"><MessageCircle size={28} /><h2 className="mt-5 font-bold">Commande</h2><p className="mt-1 text-sm text-muted-foreground">Ajoutez votre paire au panier : notre équipe vous appellera pour confirmer.</p></div>
+          <div className="rounded-lg border border-border p-7"><ShoppingBag size={28} /><h2 className="mt-5 font-bold">Passer une commande</h2><p className="mt-1 text-sm text-muted-foreground">Choisissez votre paire et votre pointure, puis confirmez vos coordonnées dans le panier.</p></div>
+          <div className="rounded-lg border border-border p-7"><MessageCircle size={28} /><h2 className="mt-5 font-bold">Confirmation</h2><p className="mt-1 text-sm text-muted-foreground">Après votre commande, notre équipe vous appellera pour confirmer la livraison.</p></div>
         </div>
       </div>
     </main>
