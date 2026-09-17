@@ -80,14 +80,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "AV Parfums — Brumes de luxe" },
-      { name: "description", content: "Brumes parfumées Sweet Dreams & Honey Touch — livraison partout en Algérie, paiement à la livraison." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "AV Parfums — Brumes de luxe" },
-      { property: "og:description", content: "Brumes parfumées Sweet Dreams & Honey Touch — livraison partout en Algérie, paiement à la livraison." },
+      { title: "Grand Line Kicks" },
+      { name: "description", content: "Air Max Plus en éditions limitées, livrées partout en Algérie." },
+      { name: "author", content: "Grand Line Kicks" },
+      { property: "og:title", content: "Grand Line Kicks" },
+      { property: "og:description", content: "Air Max Plus en éditions limitées, livrées partout en Algérie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
