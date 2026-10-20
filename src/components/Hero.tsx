@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ShoppingBag } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Link } from "@tanstack/react-router";
 import { PRODUCTS, formatDA } from "@/data/products";
 
@@ -103,7 +104,7 @@ export default function Hero() {
         touchAction: "pan-y",
       }}
     >
-      <div className="relative w-full" style={{ height: "100vh", overflow: "hidden" }}>
+      <div className="relative w-full" style={{ height: "100svh", overflow: "hidden" }}>
         {PRODUCTS.map((p, i) => (
           <div
             key={p.bg}
@@ -113,7 +114,7 @@ export default function Hero() {
               backgroundImage: `url("${p.bg}")`,
               zIndex: i === activeIndex ? 1 : 0,
               opacity: i === activeIndex ? 1 : 0,
-              transform: i === activeIndex ? "scale(1)" : "scale(1.05)",
+              transform: "scale(1)",
               transition: `opacity 800ms ${easing}, transform 1200ms ${easing}`,
             }}
           />
@@ -142,7 +143,7 @@ export default function Hero() {
         {/* Ghost name */}
         <div
           className="absolute inset-x-0 flex items-center justify-center pointer-events-none select-none"
-          style={{ zIndex: 10, top: isMobile ? "18%" : "20%", paddingInline: isMobile ? 16 : 40 }}
+          style={{ zIndex: 10, top: isMobile ? "16%" : "18%", paddingInline: isMobile ? 16 : 40 }}
         >
           <h1
             key={active.name + "-ghost"}
@@ -165,7 +166,7 @@ export default function Hero() {
           </h1>
         </div>
 
-        {/* Floating sneakers */}
+        {/* Floating perfume bottles */}
         <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 20 }}>
           {PRODUCTS.map((p, i) => {
             const isActive = i === activeIndex;
@@ -175,17 +176,17 @@ export default function Hero() {
               <img
                 key={p.image}
                 src={p.image}
-                alt={`Air Max Plus ${p.fruit} inspirée de ${p.character}`}
+                alt={`Brume parfumée ${p.name}`}
                 draggable={false}
                 className={isActive ? "floating-bottle" : ""}
                 style={{
                   position: "absolute",
-                  top: isMobile ? "48%" : "50%",
+                  top: isMobile ? "43%" : "48%",
                   right: "50%",
-                  width: isMobile ? "72%" : "65%",
+                  width: isMobile ? "68%" : "45%",
                   maxWidth: "65%",
-                  maxHeight: "55vh",
-                  height: "55vh",
+                  maxHeight: isMobile ? "46svh" : "64svh",
+                  height: isMobile ? "46svh" : "64svh",
                   objectFit: "contain",
                   opacity: isActive ? 1 : 0,
                   transform: isActive
@@ -210,13 +211,13 @@ export default function Hero() {
             className="inline-block px-3 py-1 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-widest mb-2"
             style={{ backgroundColor: "rgba(255,255,255,0.18)", backdropFilter: "blur(8px)", color: "#fff" }}
           >
-            Inspirée de {active.character}
+            {active.volume}
           </div>
           <h2
             className="mb-2 text-xl sm:text-[26px] font-bold uppercase tracking-wider"
             style={{ color: "#fff", letterSpacing: "0.06em" }}
           >
-            Air Max Plus · {active.fruit}
+            {active.name}
           </h2>
           <p
             className="text-xs sm:text-sm mb-3 mx-auto sm:mx-0 max-w-xs sm:max-w-none"
@@ -256,8 +257,10 @@ export default function Hero() {
                 const Icon = dir === "prev" ? ArrowLeft : ArrowRight;
                 const hovered = hoverBtn === dir;
                 return (
-                  <button
+                  <Button
                     key={dir}
+                    variant="ghost"
+                    size="icon"
                     aria-label={dir === "prev" ? "Précédent" : "Suivant"}
                     onClick={() => navigate(dir)}
                     onMouseEnter={() => setHoverBtn(dir)}
@@ -273,7 +276,7 @@ export default function Hero() {
                     }}
                   >
                     <Icon size={22} strokeWidth={2.25} />
-                  </button>
+                  </Button>
                 );
               })}
           </div>
@@ -285,8 +288,10 @@ export default function Hero() {
             style={{ zIndex: 60, bottom: isMobile ? 12 : 20 }}
           >
             {PRODUCTS.map((_, i) => (
-              <button
+              <Button
                 key={i}
+                variant="ghost"
+                size="icon"
                 aria-label={`Aller au modèle ${i + 1}`}
                 onClick={() => {
                   if (i === activeIndex || isAnimating) return;
@@ -314,6 +319,7 @@ export default function Hero() {
           50% { translate: 0 -14px; }
         }
         .floating-bottle { animation: floatBottle 5.5s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) { .floating-bottle { animation: none; } }
         @keyframes ghostIn {
           from { opacity: 0; transform: translateY(20px) scale(0.98); }
           to { opacity: var(--ghost-opacity, 0.22); transform: translateY(0) scale(1); }

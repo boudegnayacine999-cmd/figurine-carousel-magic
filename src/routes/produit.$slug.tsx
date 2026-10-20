@@ -11,10 +11,10 @@ export const Route = createFileRoute("/produit/$slug")({
     return product;
   },
   head: ({ loaderData }) => ({ meta: [
-    { title: loaderData ? `${loaderData.name} — Grand Line Kicks` : "Produit introuvable — Grand Line Kicks" },
-    { name: "description", content: loaderData?.description ?? "Ce modèle Grand Line Kicks est introuvable." },
-    { property: "og:title", content: loaderData ? `${loaderData.name} — Grand Line Kicks` : "Produit introuvable" },
-    { property: "og:description", content: loaderData?.tagline ?? "Découvrez la collection Grand Line Kicks." },
+    { title: loaderData ? `${loaderData.name} — Les Brumes` : "Produit introuvable — Les Brumes" },
+    { name: "description", content: loaderData?.description ?? "Ce modèle Les Brumes est introuvable." },
+    { property: "og:title", content: loaderData ? `${loaderData.name} — Les Brumes` : "Produit introuvable" },
+    { property: "og:description", content: loaderData?.tagline ?? "Découvrez la collection Les Brumes." },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
   ] }),
@@ -31,12 +31,12 @@ function ProductPage() {
       <div className="mx-auto max-w-7xl px-5 py-8 sm:px-8">
         <Link to="/boutique" className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground hover:text-foreground"><ArrowLeft size={16} /> Retour à la boutique</Link>
         <div className="mt-7 grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-square overflow-hidden rounded-lg" style={{ backgroundColor: `${product.tint}18` }}>
+          <div className="relative aspect-square overflow-hidden rounded-lg bg-muted" >
             <img src={product.bg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-            <img src={product.image} alt={`Air Max Plus ${product.name}`} className="relative z-10 h-full w-full object-contain p-8 sm:p-14" />
+            <img src={product.image} alt={`Brume ${product.name}`} className="relative z-10 h-full w-full object-contain p-8 sm:p-14" />
           </div>
           <div>
-            <p className="text-xs font-bold uppercase text-muted-foreground">Inspirée de {product.character} · {product.volume}</p>
+            <p className="text-xs font-bold uppercase text-muted-foreground">{product.volume}</p>
             <h1 className="mt-3 text-4xl font-bold uppercase sm:text-6xl" style={{ fontFamily: "Anton, sans-serif" }}>{product.name}</h1>
             <p className="mt-3 text-lg text-muted-foreground">{product.tagline}</p>
             <div className="mt-5 flex items-baseline gap-3">

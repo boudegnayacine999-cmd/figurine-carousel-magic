@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Plus, ShoppingBag } from "lucide-react";
+import { Plus } from "lucide-react";
 import type { Product } from "@/data/products";
 import { formatDA } from "@/data/products";
 import { useCart } from "@/context/CartContext";
@@ -7,19 +7,18 @@ import { Button } from "@/components/ui/button";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { add } = useCart();
-  const defaultSize = product.sizes.includes(42) ? 42 : product.sizes[0];
 
   return (
     <article className="group overflow-hidden rounded-lg border border-border bg-card text-card-foreground">
       <Link
         to="/produit/$slug"
         params={{ slug: product.id }}
-        className="relative block aspect-[4/3] overflow-hidden"
-        style={{ backgroundColor: `${product.tint}18` }}
+        className="relative block aspect-[4/3] overflow-hidden bg-muted"
+        
       >
         <img
           src={product.image}
-          alt={`Air Max Plus ${product.name}`}
+          alt={`Brume ${product.name}`}
           loading="lazy"
           className="h-full w-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
         />
@@ -29,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
       </Link>
 
       <div className="p-5">
-        <p className="text-xs font-semibold uppercase text-muted-foreground">Inspirée de {product.character}</p>
+        <p className="text-xs font-semibold uppercase text-muted-foreground">{product.tagline}</p>
         <Link to="/produit/$slug" params={{ slug: product.id }} className="mt-1 block text-xl font-bold uppercase">
           {product.name}
         </Link>
@@ -39,16 +38,14 @@ export default function ProductCard({ product }: { product: Product }) {
             {product.oldPrice && <p className="text-xs text-muted-foreground line-through">{formatDA(product.oldPrice)}</p>}
           </div>
           <Button
-            onClick={() => add(product, defaultSize)}
+            onClick={() => add(product)}
             className="h-10 rounded-full px-4 text-xs font-bold uppercase"
-            aria-label={`Ajouter ${product.name} au panier en pointure ${defaultSize}`}
+            aria-label={`Ajouter ${product.name} au panier`}
           >
             <Plus /> Ajouter
           </Button>
         </div>
-        <p className="mt-3 flex items-center gap-1 text-[11px] text-muted-foreground">
-          <ShoppingBag size={13} /> Ajout rapide en pointure {defaultSize}
-        </p>
+
       </div>
     </article>
   );
