@@ -24,7 +24,7 @@ export default function Navbar() {
           to="/"
           className="text-white font-bold uppercase tracking-[0.28em] text-xs sm:text-sm"
         >
-          Grand Line Kicks
+          Les Brumes
         </Link>
 
         <div className="hidden md:flex items-center gap-8 text-white/90 text-sm uppercase tracking-widest">

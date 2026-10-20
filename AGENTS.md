@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep the perfume catalog in the shared product module and key cart items by product ID, because perfumes do not have shoe-size variants.

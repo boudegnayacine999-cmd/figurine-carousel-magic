@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react";
 import type { Product } from "@/data/products";
 
-export type CartItem = { key: string; product: Product; size: number; qty: number };
+export type CartItem = { key: string; product: Product; qty: number };
 
 type CartCtx = {
   items: CartItem[];
@@ -11,7 +11,7 @@ type CartCtx = {
   openCart: () => void;
   closeCart: () => void;
   toggleCart: () => void;
-  add: (p: Product, size: number, qty?: number) => void;
+  add: (p: Product, qty?: number) => void;
   remove: (key: string) => void;
   setQty: (key: string, qty: number) => void;
   clear: () => void;
@@ -23,8 +23,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const add = useCallback((p: Product, size: number, qty = 1) => {
-    const key = `${p.id}-${size}`;
+  const add = useCallback((p: Product, qty = 1) => {
+    const key = p.id;
     setItems((prev) => {
       const i = prev.findIndex((it) => it.key === key);
       if (i >= 0) {
@@ -32,7 +32,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
         next[i] = { ...next[i], qty: next[i].qty + qty };
         return next;
       }
-      return [...prev, { key, product: p, size, qty }];
+      return [...prev, { key, product: p, qty }];
     });
     setIsOpen(true);
   }, []);

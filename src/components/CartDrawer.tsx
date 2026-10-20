@@ -109,8 +109,8 @@ export default function CartDrawer() {
                   {items.map((it) => (
                     <li key={it.key} className="flex gap-3">
                       <div
-                        className="w-20 h-20 rounded-lg shrink-0 flex items-center justify-center"
-                        style={{ backgroundColor: it.product.tint + "22" }}
+                        className="w-20 h-20 bg-muted rounded-lg shrink-0 flex items-center justify-center"
+                        
                       >
                         <img
                           src={it.product.image}
@@ -131,7 +131,7 @@ export default function CartDrawer() {
                             <Trash2 size={16} />
                           </Button>
                         </div>
-                        <p className="text-xs text-neutral-500">Pointure {it.size} · {it.product.volume}</p>
+                        <p className="text-xs text-neutral-500">{it.product.volume}</p>
                         <div className="mt-2 flex items-center justify-between">
                           <div className="flex items-center border rounded-full">
                             <Button

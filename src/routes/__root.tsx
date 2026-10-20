@@ -6,6 +6,7 @@ import {
   useRouter,
   HeadContent,
   Scripts,
+  type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
@@ -37,7 +38,7 @@ function NotFoundComponent() {
   );
 }
 
-function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
@@ -57,7 +58,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
           <button
             onClick={() => {
               router.invalidate();
-              reset();
+              reset?.();
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
@@ -80,11 +81,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Grand Line Kicks" },
-      { name: "description", content: "Air Max Plus en éditions limitées, livrées partout en Algérie." },
-      { name: "author", content: "Grand Line Kicks" },
-      { property: "og:title", content: "Grand Line Kicks" },
-      { property: "og:description", content: "Air Max Plus en éditions limitées, livrées partout en Algérie." },
+      { title: "Les Brumes" },
+      { name: "description", content: "Sweet Dreams, Honey Touch, Dziria et Afro Passion, livrées partout en Algérie." },
+      { name: "author", content: "Les Brumes" },
+      { property: "og:title", content: "Les Brumes" },
+      { property: "og:description", content: "Sweet Dreams, Honey Touch, Dziria et Afro Passion, livrées partout en Algérie." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

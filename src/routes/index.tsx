@@ -6,17 +6,17 @@ import { PRODUCTS } from "@/data/products";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Grand Line Kicks — Air Max Plus éditions limitées" },
+      { title: "Les Brumes — Brumes parfumées" },
       {
         name: "description",
         content:
-          "Découvrez trois Air Max Plus en éditions limitées inspirées des fruits du démon, livrées partout en Algérie.",
+          "Découvrez quatre brumes parfumées aux univers uniques, livrées partout en Algérie.",
       },
-      { property: "og:title", content: "Grand Line Kicks — Éditions limitées" },
+      { property: "og:title", content: "Les Brumes — Collection parfumée" },
       {
         property: "og:description",
         content:
-          "Découvrez les éditions Gomu Gomu, Mera Mera et Ope Ope. Paiement à la livraison en Algérie.",
+          "Découvrez Sweet Dreams, Honey Touch, Dziria et Afro Passion. Paiement à la livraison en Algérie.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -34,7 +34,7 @@ function Index() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">La collection</p>
             <h2 className="mt-2 text-3xl font-bold uppercase sm:text-5xl" style={{ fontFamily: "Anton, sans-serif" }}>
-              Choisis ton pouvoir
+              Trouve ta brume
             </h2>
           </div>
         </div>

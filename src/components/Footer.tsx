@@ -10,7 +10,7 @@ export default function Footer() {
           {[
             { Icon: Truck, t: "Livraison 58 wilayas", d: "Expédition sous 24-48h" },
             { Icon: ShieldCheck, t: "Paiement à la livraison", d: "Vous payez à la réception" },
-            { Icon: RotateCcw, t: "Échange 7 jours", d: "Taille non adaptée ? On échange" },
+            { Icon: RotateCcw, t: "Échange 7 jours", d: "Une question ? Contactez-nous" },
           ].map(({ Icon, t, d }) => (
             <div key={t} className="flex items-start gap-3">
               <Icon size={22} className="mt-0.5 shrink-0" />
@@ -25,9 +25,9 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto grid gap-10 sm:grid-cols-4 px-6 py-12 text-sm">
         <div className="sm:col-span-2">
-          <p className="font-bold uppercase tracking-[0.28em]">Grand Line Kicks</p>
+          <p className="font-bold uppercase tracking-[0.28em]">Les Brumes</p>
           <p className="mt-3 max-w-sm text-white/60 leading-relaxed">
-            Sneakers Air Max Plus en éditions limitées inspirées des fruits du démon.
+            Sweet Dreams, Honey Touch, Dziria et Afro Passion.
             Livraison partout en Algérie, paiement à la livraison.
           </p>
           <div className="mt-4 flex gap-3">
@@ -67,7 +67,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10 px-6 py-5 text-center text-xs text-white/40">
-        © {new Date().getFullYear()} Grand Line Kicks. Éditions non officielles inspirées de l'univers pirate.
+        © {new Date().getFullYear()} Les Brumes. Brumes parfumées.
       </div>
     </footer>
   );
