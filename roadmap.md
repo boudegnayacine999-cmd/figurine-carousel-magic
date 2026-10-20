@@ -1,5 +1,8 @@
 # Roadmap
 
+- [ ] Restaurer les quatre brumes et leur présentation d’origine
+- [ ] Adapter la boutique et le panier aux parfums sans pointures
+
 - [x] Ajuster le cadrage des chaussures et la lisibilité du texte du carrousel
 - [x] Créer les cartes produit avec ajout rapide
 - [x] Créer la boutique et les fiches produit avec taille et quantité
